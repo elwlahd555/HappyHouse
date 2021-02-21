@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.ssafy.happy.repository.mapper.InfoBoardMapper">
+
+	<select id="selectIboard" resultType="infoBoard">
+		select * from infoboard
+		order by ino
+	</select>
+	
+	<delete id="deleteIboardByIno" parameterType="Integer">
+	delete from infoboard where ino = #{ino}
+	</delete>
+	
+	<select id="selectIboardByIno" parameterType="Integer" resultType="infoBoard">
+	select * from infoboard where ino = #{ino}
+	</select>
+
+<update id="updateIBoard" parameterType="InfoBoard">
+update infoboard set title = #{title}, content = #{content} where ino = #{ino}
+</update>
+
+<insert id="InsertIBoard" parameterType="InfoBoard">
+insert into infoboard(title,content,writer,position,viewcnt,wday) values(#{title}, #{content}, #{writer}, #{position}, 0, curdate() )
+</insert>
+</mapper>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.ssafy.happy.repository.mapper.HouseMapper">
+
+	<select id="getAptDeal" parameterType="String" resultType="houseDeal">
+      select 
+         h.no, 
+         h.dong, 
+         h.AptName , 
+         h.code , 
+         h.dealAmount , 
+         h.buildYear , 
+         h.dealYear , 
+         h.dealMonth , 
+         h.dealDay , 
+         h.area, 
+         h.floor , 
+         h.jibun , 
+         hi.lat, 
+         hi.lng
+      from 
+         housedeal h left join houseinfo hi
+         on 
+            h.AptName = hi.AptName 
+         and 
+            h.dong = hi.dong
+      where 
+         h.dong=(
+            select 
+               dong 
+            from 
+               dongcode 
+            where 
+               dongcode = #{dongcode})
+   </select>
+   	<select id="AptDeal" resultType="houseDeal">
+
+      select 
+         h.no, 
+         h.dong, 
+         h.AptName, 
+         h.code, 
+         h.dealAmount, 
+         h.buildYear, 
+         h.dealYear, 
+         h.dealMonth, 
+         h.dealDay, 
+         h.area, 
+         h.floor, 
+         h.type, 
+         h.jibun, 
+         hi.lat, 
+         hi.lng
+      from 
+         housedeal h left join houseinfo hi
+         on 
+            h.AptName = hi.AptName 
+         and 
+            h.dong = hi.dong
+   </select>
+
+
+</mapper>

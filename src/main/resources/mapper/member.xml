@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.ssafy.happy.repository.mapper.MemberMapper">
+
+
+<select id="selectMemberByEmail" parameterType="String" resultType="member">
+select * from member where email = #{email}
+
+
+</select>
+
+
+<insert id="insert" parameterType="member">
+INSERT INTO `member`(name, email, password, grade, tel, address ) VALUES ( #{name}, #{email}, #{password}, "bronze", #{tel}, #{address} )
+</insert>
+
+
+<update id="update" parameterType="member">
+UPDATE member
+SET password = #{password}
+WHERE email = #{email}
+</update>
+
+<select id="selectUser" resultType="member">
+select * from member
+</select>
+
+<update id="updateUserByEmail" parameterType="member">
+
+UPDATE member SET name = #{name}, grade = #{grade}, tel = #{tel}, address = #{address} WHERE email = #{email}
+
+</update>
+
+
+<delete id="deleteUser" parameterType="String">
+delete from member where email = #{email}
+</delete>
+
+
+<update id="updateMember" parameterType="member">
+UPDATE member SET name = #{name}, password = #{password}, tel = #{tel}, address = #{address} WHERE email = #{email}
+
+</update>
+</mapper>

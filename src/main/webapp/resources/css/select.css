@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+select {
+  background-image: url(http://www.goodauction.com/img/icon/sel_arr_3.png);
+  background-position: 100% 50%;
+  background-repeat: no-repeat;
+  border: solid 1px #b3bbbf;
+  display: inline-block;
+  margin-top: 0px;
+  background-color: #fefefe;
+  border-color: #ddd;
+  height: 39px;
+  padding: 5px 15px 5px 20px;
+  font-size: 14px;
+  -webkit-border-radius: 8px;
+  width: 200px;
+  font-family: 'Nanum Gothic','맑은 고딕', san-serif, IcoMoon,dashicons, FontAwesome !important;
+  -webkit-writing-mode: horizontal-tb !important;
+  text-rendering: auto;
+  color: -internal-light-dark(black, white);
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  text-align: start;
+  box-sizing: border-box;
+  align-items: center;
+  white-space: pre;
+  -webkit-rtl-ordering: logical;
+  cursor: default;
+  font: 400 13.3333px Arial;
+  appearance: none;
+
+}
+select:not(:-internal-list-box) {
+    overflow: visible !important;
+}
+
+option {
+    font-weight: normal;
+    display: block;
+    white-space: pre;
+    min-height: 1.2em;
+    padding: 5px 2px;
+    font-size: 14px;
+    font-family: 'Nanum Gothic','맑은 고딕', san-serif, IcoMoon,dashicons, FontAwesome !important;
+
+
+    
+}

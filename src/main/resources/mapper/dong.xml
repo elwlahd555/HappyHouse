@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.ssafy.happy.repository.mapper.SidoGugunDongMapper">
+
+	<select id="getDongInGugun" resultType="sidoGugunDong">
+		SELECT dongcode as "dong_code", dong as "dong_name"
+		FROM dongcode
+		WHERE left(dongcode, 5) = #{gugun}
+		ORDER BY dongcode
+	</select>
+
+	<select id="getSido" resultType="sidoGugunDong">
+		select left(sido_code,2)
+		sido_code, sido_name from sidocode order by sido_code
+	</select>
+
+	<select id="getGugunInSido" resultType="sidoGugunDong">
+		SELECT left(gugun_code,5) gugun_code, gugun_name FROM guguncode
+		where left(gugun_code,2) = #{sido}
+		ORDER BY gugun_code
+	</select>
+	<select id="getHouse" resultType="houseDeal">
+              select 
+         h.no, 
+         h.dong, 
+         h.AptName , 
+         h.code , 
+         h.dealAmount , 
+         h.buildYear , 
+         h.dealYear , 
+         h.dealMonth , 
+         h.dealDay , 
+         h.area, 
+         h.floor , 
+         h.jibun , 
+         hi.lat, 
+         hi.lng,
+         h.type
+      from 
+         housedeal h left join houseinfo hi
+         on 
+            h.AptName = hi.AptName 
+         and 
+            h.dong = hi.dong
+      where h.dong=#{dong};
+	</select>
+	
+
+	
+</mapper>

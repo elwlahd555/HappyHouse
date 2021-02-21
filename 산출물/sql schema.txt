@@ -1,0 +1,164 @@
+﻿-- 테이블 순서는 관계를 고려하여 한 번에 실행해도 에러가 발생하지 않게 정렬되었습니다.
+
+-- member Table Create SQL
+CREATE TABLE member
+(
+    `email`     VARCHAR(45)     NULL        COMMENT 'email', 
+    `name`      VARCHAR(20)     NULL        COMMENT '이름', 
+    `password`  VARCHAR(45)     NULL        COMMENT '비밀번호', 
+    `rank`      VARCHAR(20)     NULL        COMMENT '등급', 
+    `memberno`  INT             NULL        AUTO_INCREMENT COMMENT '회원번호', 
+    `tel`       VARCHAR(45)     NULL        COMMENT '전화', 
+    `address`   VARCHAR(200)    NULL        COMMENT '주소', 
+    PRIMARY KEY (memberno)
+);
+
+ALTER TABLE member COMMENT '회원가입 멤버관리 테이블';
+
+
+-- member Table Create SQL
+CREATE TABLE dongcode
+(
+    `dongcode`  VARCHAR(100)    NOT NULL    COMMENT 'dongcode', 
+    `city`      VARCHAR(70)     NULL        COMMENT '도시', 
+    `gugun`     VARCHAR(50)     NULL        COMMENT '군', 
+    `dong`      VARCHAR(50)     NULL        COMMENT '동', 
+    PRIMARY KEY (dongcode)
+);
+
+ALTER TABLE dongcode COMMENT '동코드';
+
+
+-- member Table Create SQL
+CREATE TABLE memberinterestplace
+(
+    `memberno`  INT             NULL        COMMENT '회원번호', 
+    `dongcode`  VARCHAR(100)    NULL        COMMENT 'dongcode', 
+    PRIMARY KEY (memberno, dongcode)
+);
+
+ALTER TABLE memberinterestplace COMMENT '관심지역';
+
+ALTER TABLE memberinterestplace
+    ADD CONSTRAINT FK_memberinterestplace_dongcode_dongcode_dongcode FOREIGN KEY (dongcode)
+        REFERENCES dongcode (dongcode) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE memberinterestplace
+    ADD CONSTRAINT FK_memberinterestplace_memberno_member_memberno FOREIGN KEY (memberno)
+        REFERENCES member (memberno) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+-- member Table Create SQL
+CREATE TABLE clinic
+(
+    `clinicid`       INT             NOT NULL    COMMENT '진료소 구별', 
+    `available`      VARCHAR(45)     NULL        COMMENT '가능여부', 
+    `sido`           VARCHAR(45)     NULL        COMMENT '시도', 
+    `gugun`          VARCHAR(45)     NULL        COMMENT '시군구', 
+    `clinicname`     VARCHAR(45)     NULL        COMMENT '의료기관명', 
+    `clinicaddress`  VARCHAR(200)    NULL        COMMENT '주소', 
+    `weekdaytime`    VARCHAR(60)     NULL        COMMENT '평일 운영시간', 
+    `saturdaytime`   VARCHAR(60)     NULL        COMMENT '토요일 운영시간', 
+    `redtime`        VARCHAR(60)     NULL        COMMENT '일요일/공휴일', 
+    `clinictel`      VARCHAR(45)     NULL        COMMENT '전화번호', 
+    PRIMARY KEY (clinicid)
+);
+
+ALTER TABLE clinic COMMENT '선별진료소';
+
+
+-- member Table Create SQL
+CREATE TABLE pollution
+(
+    `licenseno`       VARCHAR(45)     NOT NULL    COMMENT '인허가번호', 
+    `company`         VARCHAR(45)     NULL        COMMENT '업체(시설)명', 
+    `sectorscode`     VARCHAR(45)     NULL        COMMENT '업종코드', 
+    `sectorsname`     VARCHAR(45)     NULL        COMMENT '업종명', 
+    `checkdate`       VARCHAR(45)     NULL        COMMENT '지도점검일자', 
+    `Disposaltarget`  CHAR(1)         NULL        COMMENT '처분대상여부', 
+    `checklisting`    VARCHAR(100)    NULL        COMMENT '점검사항', 
+    `checkresult`     VARCHAR(100)    NULL        COMMENT '점검결과', 
+    `address`         VARCHAR(100)    NULL        COMMENT '소재지주소', 
+    PRIMARY KEY (licenseno)
+);
+
+ALTER TABLE pollution COMMENT '오염정보';
+
+
+-- member Table Create SQL
+CREATE TABLE market
+(
+    `sectionno`     VARCHAR(45)     NOT NULL    COMMENT '상가업소번호', 
+    `sectionname`   VARCHAR(45)     NULL        COMMENT '상호명', 
+    `branchname`    VARCHAR(45)     NULL        COMMENT '지점명', 
+    `maincategory`  VARCHAR(45)     NULL        COMMENT '상권업종대분류명', 
+    `subcategory`   VARCHAR(45)     NULL        COMMENT '상권업종중분류명', 
+    `sidocode`      VARCHAR(30)     NULL        COMMENT '시도코드', 
+    `guguncode`     VARCHAR(30)     NULL        COMMENT '시군구코드', 
+    `dongcode`      VARCHAR(45)     NULL        COMMENT '행정동코드', 
+    `address`       VARCHAR(200)    NULL        COMMENT '도로명', 
+    `lon`           VARCHAR(30)     NULL        COMMENT '경도', 
+    `lat`           VARCHAR(30)     NULL        COMMENT '위도', 
+    PRIMARY KEY (sectionno)
+);
+
+ALTER TABLE market COMMENT '주변상가';
+
+
+-- member Table Create SQL
+CREATE TABLE hospital
+(
+    `hospitalid`       INT             NOT NULL    COMMENT '병원 구별', 
+    `sido`             VARCHAR(45)     NULL        COMMENT '시도', 
+    `gugun`            VARCHAR(45)     NULL        COMMENT '시군구', 
+    `hospitalname`     VARCHAR(45)     NULL        COMMENT '의료기관명', 
+    `hospitaladdress`  VARCHAR(200)    NULL        COMMENT '주소', 
+    `apply`            CHAR(1)         NULL        COMMENT '신청유형', 
+    `hospitaltel`      VARCHAR(45)     NULL        COMMENT '전화번호', 
+    PRIMARY KEY (hospitalid)
+);
+
+ALTER TABLE hospital COMMENT '병원';
+
+
+-- member Table Create SQL
+CREATE TABLE housedeal
+(
+    `no`          INT            NOT NULL    AUTO_INCREMENT, 
+    `dong`        VARCHAR(30)    NOT NULL, 
+    `AptName`     VARCHAR(50)    NOT NULL, 
+    `code`        VARCHAR(30)    NOT NULL, 
+    `dealAmount`  VARCHAR(50)    NOT NULL, 
+    `buildYear`   VARCHAR(30)    NULL        DEFAULT NULL, 
+    `dealYear`    VARCHAR(30)    NULL        DEFAULT NULL, 
+    `dealMonth`   VARCHAR(30)    NULL        DEFAULT NULL, 
+    `dealDay`     VARCHAR(30)    NULL        DEFAULT NULL, 
+    `area`        VARCHAR(30)    NULL        DEFAULT NULL, 
+    `floor`       VARCHAR(30)    NULL        DEFAULT NULL, 
+    `jibun`       VARCHAR(30)    NULL        DEFAULT NULL, 
+    `type`        VARCHAR(30)    NULL        DEFAULT NULL, 
+    `rentMoney`   VARCHAR(30)    NULL        DEFAULT NULL, 
+    PRIMARY KEY (no)
+);
+
+ALTER TABLE housedeal COMMENT '거래정보';
+
+
+-- member Table Create SQL
+CREATE TABLE houseinfo
+(
+    `no`         INT            NOT NULL    AUTO_INCREMENT, 
+    `dong`       VARCHAR(30)    NOT NULL, 
+    `AptName`    VARCHAR(50)    NOT NULL, 
+    `code`       VARCHAR(30)    NOT NULL, 
+    `buildYear`  VARCHAR(30)    NULL        DEFAULT NULL, 
+    `jibun`      VARCHAR(30)    NULL        DEFAULT NULL, 
+    `lat`        VARCHAR(30)    NULL        DEFAULT NULL, 
+    `lng`        VARCHAR(30)    NULL        DEFAULT NULL, 
+    `img`        VARCHAR(50)    NULL        DEFAULT NULL, 
+    PRIMARY KEY (no)
+);
+
+ALTER TABLE houseinfo COMMENT '아파트정보';
+
+
